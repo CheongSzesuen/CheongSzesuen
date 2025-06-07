@@ -3,7 +3,7 @@
 
 **About Me**  
 
-我是 **CheongSzesuen ** 。
+我是 **CheongSzesuen** 。
 
 <code><img height="20" alt="html" src="https://raw.githubusercontent.com/github/explore/main/topics/html/html.png"></code>
 <code><img height="20" alt="css" src="https://raw.githubusercontent.com/github/explore/main/topics/css/css.png"></code>
