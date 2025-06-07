@@ -25,13 +25,3 @@
 <a href="https://github.com/CheongSzesuen/unflodPictures">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=CheongSzesuen&repo=unflodPictures&theme=buefy" />
 </a>
-
-<br />
-<br />
-
-<a href="https://twitter.com/CheongSzesuen">
-  <img align="right" alt="CheongSzesuen | Twitter" width="21px" src="https://raw.githubusercontent.com/github/explore/main/topics/twitter/twitter.png" />
-</a>
-<a href="https://codesandbox.io/u/CheongSzesuen">
-  <img align="right" alt="CheongSzesuen | CodeSandbox" width="20px" src="https://raw.githubusercontent.com/github/explore/main/topics/codesandbox/codesandbox.png" />
-</a>
