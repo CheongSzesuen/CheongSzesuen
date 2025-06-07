@@ -1,4 +1,3 @@
-<p align="center"><a href="https://CheongSzesuen.github.io"><img width="80%" alt="Hello, I'm CheongSzesuen. Welcome to my GitHub!" src="./assets/gh-readme-header.png" /></a></p>
 
 <br />
 
