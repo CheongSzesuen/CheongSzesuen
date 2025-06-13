@@ -19,9 +19,18 @@
 <a href="https://github.com/CheongSzesuen/CheongSzesuen.github.io">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=CheongSzesuen&repo=CheongSzesuen.github.io&theme=buefy" />
 </a>
-<a href="https://github.com/CheongSzesuen/wbza">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=CheongSzesuen&repo=wbza&theme=buefy" />
+<a href="https://github.com/still-alive-hhz/OK-School-Life">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=still-alive-hhz&repo=OK-School-Life&theme=buefy" />
 </a>
-<a href="https://github.com/CheongSzesuen/unflodPictures">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=CheongSzesuen&repo=unflodPictures&theme=buefy" />
+
+<a href="https://github.com/CheongSzesuen/OK-School-Life-MiBandPro">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=CheongSzesuen&repo=OK-School-Life-MiBandPro&theme=buefy" />
+</a>
+
+<a href="https://github.com/CheongSzesuen/OK-School-Life-Web">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=CheongSzesuen&repo=OK-School-Life-Web&theme=buefy" />
+</a>
+
+<a href="https://github.com/CheongSzesuen/Image2Array">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=CheongSzesuen&repo=Image2Array&theme=buefy" />
 </a>
