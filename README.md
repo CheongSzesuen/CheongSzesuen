@@ -5,6 +5,7 @@
 
 我是 **CheongSzesuen** 。
 
+
 <code><img height="20" alt="html" src="https://raw.githubusercontent.com/github/explore/main/topics/html/html.png"></code>
 <code><img height="20" alt="css" src="https://raw.githubusercontent.com/github/explore/main/topics/css/css.png"></code>
 <code><img height="20" alt="javascript" src="https://raw.githubusercontent.com/github/explore/main/topics/javascript/javascript.png"></code>
@@ -34,3 +35,7 @@
 <a href="https://github.com/CheongSzesuen/Image2Array">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=CheongSzesuen&repo=Image2Array&theme=buefy" />
 </a>
+
+#### 开源？
+>作为开源软件，GeoGebra倡导免费使用、贡献共享的理念，我们在享受他人所贡献的丰富资源的同时，是不是也期待着能有所贡献呢？
+数学书如是说。
