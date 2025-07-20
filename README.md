@@ -1,8 +1,7 @@
 
 <br />
 
-我是 **CheongSzesuen** 。
-
+我是 **CheongSzesuen** ，更多使用的名字也许是**WaiJade**。WaiJade，意为怀瑾握瑜，音译于怀瑾。
 
 <code><img height="20" alt="html" src="https://raw.githubusercontent.com/github/explore/main/topics/html/html.png"></code>
 <code><img height="20" alt="css" src="https://raw.githubusercontent.com/github/explore/main/topics/css/css.png"></code>
