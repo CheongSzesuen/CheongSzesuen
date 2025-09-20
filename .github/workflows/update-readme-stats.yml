@@ -14,7 +14,7 @@ jobs:
 
       - name: Fetch Stats SVG
         run: |
-          wget -qO stats.svg "https://github-readme-stats.vercel.app/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true"
+          wget -qO stats.svg "github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true"
 
       - name: Extract Data from SVG (sed method)
         id: stats
