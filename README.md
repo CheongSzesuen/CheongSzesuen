@@ -22,7 +22,7 @@ waijade
 # Total PRs: 21
 # Total PRs Merged:
 # Merged PRs Percentage:
-# Total issues:
+# Total Issues:
 # Total PRs Reviewed:
 #
 # Open source
@@ -42,7 +42,7 @@ waijade
 # 累计PR：21
 # 累计PR被合并数:
 # PR被合并率:
-# 累计issues:
+# 累计Issues:
 # 累计审查PR数:
 #
 # 开源
