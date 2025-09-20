@@ -14,7 +14,7 @@ jobs:
 
       - name: Fetch Stats (JSON)
         run: |
-          curl -s "https://api.github-readme-stats.vercel.app/api?username=CheongSzesuen&include_all_commits=true&format=json" > stats.json
+          wget -qO stats.json "https://api.github-readme-stats.vercel.app/api?username=CheongSzesuen&include_all_commits=true&format=json"
 
       - name: Extract Data
         id: stats
