@@ -19,7 +19,7 @@ but you may know me better as WaiJade —
 a name phonetically derived from “Huái Jǐn”,  
 embodying the virtue of “holding jade within heart and hand”,  
 as written in “Huai Sha” from the Nine Chapters of the Songs of Chu:  
-> “I hold virtues like jade, yet none perceive them in my plight.”
+“I hold virtues like jade, yet none perceive them in my plight.”
 
 [waijade@waijadelinux ~]$ cat ~/.identity.zh
 我是CheongSzesuen。
