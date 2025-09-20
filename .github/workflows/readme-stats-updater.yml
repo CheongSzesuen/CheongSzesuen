@@ -14,36 +14,45 @@ jobs:
 
       - name: Fetch Stats SVG
         run: |
-          wget -qO stats.svg "https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true\&show_icons=true\&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage"
+          wget -qO stats.svg "https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true&show_icons=true&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage"
 
-      - name: Extract Data from SVG (<desc> method)
+      - name: Extract All Data from <desc> (100% Stable)
         id: stats
         run: |
-          # 从 <desc> 标签提取整行文本
-          DESC_LINE=$(grep '<desc id="descId">' stats.svg | sed 's/.*<desc[^>]*>//; s/<\/desc.*//')
+          # 提取 <desc> 标签内的完整文本
+          DESC_TEXT=$(grep '<desc id="descId">' stats.svg | sed 's/.*<desc[^>]*>//; s/<\/desc.*//')
 
-          # 从描述文本中提取各字段
-          STARS=$(echo "$DESC_LINE" | grep -o 'Total Stars Earned: *[0-9]*' | grep -o '[0-9]*$')
-          COMMITS=$(echo "$DESC_LINE" | grep -o 'Total Commits *: *[0-9]*' | grep -o '[0-9]*$')
-          PRS=$(echo "$DESC_LINE" | grep -o 'Total PRs: *[0-9]*' | grep -o '[0-9]*$')
-          ISSUES=$(echo "$DESC_LINE" | grep -o 'Total Issues: *[0-9]*' | grep -o '[0-9]*$')
+          # 从文本中提取各字段（支持任意空格）
+          STARS=$(echo "$DESC_TEXT" | grep -o 'Total Stars Earned: *[0-9]*' | grep -o '[0-9]*$')
+          COMMITS=$(echo "$DESC_TEXT" | grep -o 'Total Commits *: *[0-9]*' | grep -o '[0-9]*$')
+          PRS=$(echo "$DESC_TEXT" | grep -o 'Total PRs: *[0-9]*' | grep -o '[0-9]*$')
+          PRS_MERGED=$(echo "$DESC_TEXT" | grep -o 'Total PRs Merged: *[0-9]*' | grep -o '[0-9]*$')
+          MERGED_PERCENTAGE=$(echo "$DESC_TEXT" | grep -o 'Merged PRs Percentage: *[0-9.]*' | grep -o '[0-9.]*$')
+          PRS_REVIEWED=$(echo "$DESC_TEXT" | grep -o 'Total PRs Reviewed: *[0-9]*' | grep -o '[0-9]*$')
+          ISSUES=$(echo "$DESC_TEXT" | grep -o 'Total Issues: *[0-9]*' | grep -o '[0-9]*$')
 
           # 从 <title> 提取 Rank
-          TITLE_LINE=$(grep '<title id="titleId">' stats.svg | sed 's/.*<title[^>]*>//; s/<\/title.*//')
-          RANK=$(echo "$TITLE_LINE" | grep -o 'Rank: *[A-Z]' | grep -o '[A-Z]$')
+          TITLE_TEXT=$(grep '<title id="titleId">' stats.svg | sed 's/.*<title[^>]*>//; s/<\/title.*//')
+          RANK=$(echo "$TITLE_TEXT" | grep -o 'Rank: *[A-Z]' | grep -o '[A-Z]$')
 
           # 兜底（按你要求，保留“Action出错”）
           RANK=${RANK:-Action出错}
           STARS=${STARS:-Action出错}
           COMMITS=${COMMITS:-Action出错}
           PRS=${PRS:-Action出错}
+          PRS_MERGED=${PRS_MERGED:-Action出错}
+          MERGED_PERCENTAGE=${MERGED_PERCENTAGE:-Action出错}
+          PRS_REVIEWED=${PRS_REVIEWED:-Action出错}
           ISSUES=${ISSUES:-Action出错}
 
-          # 输出
+          # 输出供后续步骤使用
           echo "rank=$RANK" >> $GITHUB_OUTPUT
           echo "stars=$STARS" >> $GITHUB_OUTPUT
           echo "commits=$COMMITS" >> $GITHUB_OUTPUT
           echo "prs=$PRS" >> $GITHUB_OUTPUT
+          echo "prs_merged=$PRS_MERGED" >> $GITHUB_OUTPUT
+          echo "merged_percentage=$MERGED_PERCENTAGE" >> $GITHUB_OUTPUT
+          echo "prs_reviewed=$PRS_REVIEWED" >> $GITHUB_OUTPUT
           echo "issues=$ISSUES" >> $GITHUB_OUTPUT
 
           echo "=== Extracted Stats ==="
@@ -51,6 +60,9 @@ jobs:
           echo "Stars: $STARS"
           echo "Commits: $COMMITS"
           echo "PRs: $PRS"
+          echo "PRs Merged: $PRS_MERGED"
+          echo "Merged PRs Percentage: $MERGED_PERCENTAGE"
+          echo "PRs Reviewed: $PRS_REVIEWED"
           echo "Issues: $ISSUES"
 
       - name: Update README.md
@@ -59,6 +71,9 @@ jobs:
           STARS="${{ steps.stats.outputs.stars }}"
           COMMITS="${{ steps.stats.outputs.commits }}"
           PRS="${{ steps.stats.outputs.prs }}"
+          PRS_MERGED="${{ steps.stats.outputs.prs_merged }}"
+          MERGED_PERCENTAGE="${{ steps.stats.outputs.merged_percentage }}"
+          PRS_REVIEWED="${{ steps.stats.outputs.prs_reviewed }}"
           ISSUES="${{ steps.stats.outputs.issues }}"
 
           # 更新英文部分
@@ -66,14 +81,20 @@ jobs:
           sed -i "s/^# Total Stars Earned:.*/# Total Stars Earned: $STARS/" README.md
           sed -i "s/^# Total Commits:.*/# Total Commits: $COMMITS/" README.md
           sed -i "s/^# Total PRs:.*/# Total PRs: $PRS/" README.md
+          sed -i "s/^# Total PRs Merged:.*/# Total PRs Merged: $PRS_MERGED/" README.md
+          sed -i "s/^# Merged PRs Percentage:.*/# Merged PRs Percentage: $MERGED_PERCENTAGE/" README.md
+          sed -i "s/^# Total PRs Reviewed:.*/# Total PRs Reviewed: $PRS_REVIEWED/" README.md
           sed -i "s/^# Total Issues:.*/# Total Issues: $ISSUES/" README.md
 
           # 更新中文部分
           sed -i "s/^# GitHub数据（[^）]*）/# GitHub数据（$RANK）/" README.md
           sed -i "s/^# 累计获得Stars：.*/# 累计获得Stars：$STARS/" README.md
           sed -i "s/^# 累计Commits：.*/# 累计Commits：$COMMITS/" README.md
-          sed -i "s/^# 累计PRs：.*/# 累计PRs：$PRS/" README.md
-          sed -i "s/^# 累计Issues：.*/# 累计Issues：$ISSUES/" README.md
+          sed -i "s/^# 累计PR：.*/# 累计PR：$PRS/" README.md
+          sed -i "s/^# 累计PR被合并数:.*/# 累计PR被合并数: $PRS_MERGED/" README.md
+          sed -i "s/^# PR被合并率:.*/# PR被合并率: $MERGED_PERCENTAGE/" README.md
+          sed -i "s/^# 累计审查PR数:.*/# 累计审查PR数: $PRS_REVIEWED/" README.md
+          sed -i "s/^# 累计Issues:.*/# 累计issues: $ISSUES/" README.md
 
       - name: Commit & Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
