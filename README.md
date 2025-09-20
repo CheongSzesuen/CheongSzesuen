@@ -17,8 +17,9 @@ waijade
 # —— From 'Chu Ci · Jiang Chapter 9 · Huai Sha'
 #
 # Open source
-# “As open-source software, GeoGebra promotes the ideals of free access and shared contribution.While we enjoy the rich resources contributed by others, shouldn’t we also aspire to give something back?”
-# —— Quoted from:Beijing Normal University Press. (2024). Mathematics · Compulsory Course I [普通高中教科书 数学 必修第一册]. Beijing Normal University Press.
+# “As open-source software, GeoGebra promotes the ideals of free access and shared contribution.
+# While we enjoy the rich resources contributed by others, shouldn’t we also aspire to give something back?”
+# —— Quoted from: Mathematics · Compulsory Course I [普通高中教科书 数学 必修第一册]. Beijing Normal University Press.
 
 [waijade@waijadeArch ~]$ cat ~/.identity.zh
 # 我是CheongSzesuen。
