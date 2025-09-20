@@ -16,10 +16,10 @@ waijade
 # taken from 'Holding the jade and embracing it, though poor, never knowing what to show.'
 # —— From 'Chu Ci · Jiang Chapter 9 · Huai Sha'
 #
-# My GitHub Stats(B)
-# Total Stars Earned: 23
-# Total Commits: 884
-# Total PRs: 21
+# My GitHub Stats(Action出错)
+# Total Stars Earned: Action出错
+# Total Commits: Action出错
+# Total PRs: Action出错
 # Total issues:
 #
 # Open source
@@ -33,10 +33,10 @@ waijade
 # WaiJade，音译于”怀瑾“，意为“怀瑾握瑜”，取自「怀瑾握瑜兮，穷不知所示。」
 # ——《楚辞·九章·怀沙》
 #
-# GitHub数据（B）
-# 累计获得Stars：23
-# 累计Commits：884
-# 累计PRs：21
+# GitHub数据（Action出错）
+# 累计获得Stars：Action出错
+# 累计Commits：Action出错
+# 累计PRs：Action出错
 # 累计issues：
 #
 # 开源
