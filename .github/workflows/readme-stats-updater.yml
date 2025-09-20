@@ -2,8 +2,8 @@ name: Update README Stats
 
 on:
   schedule:
-    - cron: '0 16 * * *'  # 每天 UTC 16 点 = 北京时间 00:00
-  workflow_dispatch:      # 允许手动触发
+    - cron: '0 16 * * *'  # 北京时间 00:00
+  workflow_dispatch:
 
 jobs:
   update:
@@ -16,24 +16,37 @@ jobs:
         run: |
           wget -qO stats.svg "https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true"
 
-      - name: Extract Data from SVG (sed method)
+      - name: Extract Data from SVG (Support 'k' units)
         id: stats
         run: |
-          # 使用 sed 提取，兼容所有环境
+          # 提取 Rank
           RANK=$(sed -n 's/.*data-testid="level-rank-icon"[^>]*>[[:space:]]*\([A-Z]\)[[:space:]]*<.*/\1/p' stats.svg)
+
+          # 提取 Stars
           STARS=$(sed -n 's/.*data-testid="stars"[^>]*>[[:space:]]*\([0-9][0-9]*\)[[:space:]]*<.*/\1/p' stats.svg)
-          COMMITS=$(sed -n 's/.*data-testid="commits"[^>]*>[[:space:]]*\([0-9][0-9]*\)[[:space:]]*<.*/\1/p' stats.svg)
+
+          # 提取 Commits（支持 k）
+          COMMITS_RAW=$(sed -n 's/.*data-testid="commits"[^>]*>[[:space:]]*\([^<]*\)[[:space:]]*<.*/\1/p' stats.svg)
+          if [[ "$COMMITS_RAW" == *"k" ]]; then
+            COMMITS=$(echo "$COMMITS_RAW" | sed 's/k//' | awk '{printf "%.0f", $1 * 1000}')
+          else
+            COMMITS=$COMMITS_RAW
+          fi
+
+          # 提取 PRs
           PRS=$(sed -n 's/.*data-testid="prs"[^>]*>[[:space:]]*\([0-9][0-9]*\)[[:space:]]*<.*/\1/p' stats.svg)
+
+          # 提取 Issues
           ISSUES=$(sed -n 's/.*data-testid="issues"[^>]*>[[:space:]]*\([0-9][0-9]*\)[[:space:]]*<.*/\1/p' stats.svg)
 
-          # 如果提取失败，使用知识库默认值（兜底）
+          # 兜底
           RANK=${RANK:-B}
           STARS=${STARS:-23}
           COMMITS=${COMMITS:-884}
           PRS=${PRS:-21}
           ISSUES=${ISSUES:-59}
 
-          # 输出供后续步骤使用
+          # 输出
           echo "rank=$RANK" >> $GITHUB_OUTPUT
           echo "stars=$STARS" >> $GITHUB_OUTPUT
           echo "commits=$COMMITS" >> $GITHUB_OUTPUT
@@ -43,7 +56,7 @@ jobs:
           echo "=== Extracted Stats ==="
           echo "Rank: $RANK"
           echo "Stars: $STARS"
-          echo "Commits: $COMMITS"
+          echo "Commits: $COMMITS (from: $COMMITS_RAW)"
           echo "PRs: $PRS"
           echo "Issues: $ISSUES"
 
@@ -55,14 +68,14 @@ jobs:
           PRS="${{ steps.stats.outputs.prs }}"
           ISSUES="${{ steps.stats.outputs.issues }}"
 
-          # 更新英文部分 —— 支持无限次更新
+          # 更新英文部分
           sed -i "s/^# My GitHub Stats([^)]*)/# My GitHub Stats($RANK)/" README.md
           sed -i "s/^# Total Stars Earned:.*/# Total Stars Earned: $STARS/" README.md
           sed -i "s/^# Total Commits:.*/# Total Commits: $COMMITS/" README.md
           sed -i "s/^# Total PRs:.*/# Total PRs: $PRS/" README.md
           sed -i "s/^# Total Issues:.*/# Total Issues: $ISSUES/" README.md
 
-          # 更新中文部分 —— 支持无限次更新
+          # 更新中文部分
           sed -i "s/^# GitHub数据（[^）]*）/# GitHub数据（$RANK）/" README.md
           sed -i "s/^# 累计获得Stars：.*/# 累计获得Stars：$STARS/" README.md
           sed -i "s/^# 累计Commits：.*/# 累计Commits：$COMMITS/" README.md
