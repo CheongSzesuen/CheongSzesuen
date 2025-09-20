@@ -16,17 +16,20 @@ jobs:
         run: |
           wget -qO stats.svg "https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true"
 
-      - name: Extract Data from SVG (Support 'k' units)
+      - name: Extract Data from SVG (Robust + Keep 'Action出错' Fallback)
         id: stats
         run: |
           # 提取 Rank
-          RANK=$(sed -n 's/.*data-testid="level-rank-icon"[^>]*>[[:space:]]*\([A-Z]\)[[:space:]]*<.*/\1/p' stats.svg)
+          RANK_LINE=$(grep -m1 'data-testid="level-rank-icon"' stats.svg)
+          RANK=$(echo "$RANK_LINE" | sed -n 's/.*>\s*\([A-Z]\)\s*<.*/\1/p')
 
           # 提取 Stars
-          STARS=$(sed -n 's/.*data-testid="stars"[^>]*>[[:space:]]*\([0-9][0-9]*\)[[:space:]]*<.*/\1/p' stats.svg)
+          STARS_LINE=$(grep -m1 'data-testid="stars"' stats.svg)
+          STARS=$(echo "$STARS_LINE" | sed -n 's/.*>\s*\([0-9]\+\)\s*<.*/\1/p')
 
           # 提取 Commits（支持 k）
-          COMMITS_RAW=$(sed -n 's/.*data-testid="commits"[^>]*>[[:space:]]*\([^<]*\)[[:space:]]*<.*/\1/p' stats.svg)
+          COMMITS_LINE=$(grep -m1 'data-testid="commits"' stats.svg)
+          COMMITS_RAW=$(echo "$COMMITS_LINE" | sed -n 's/.*>\s*\([^<]*\)\s*<.*/\1/p')
           if [[ "$COMMITS_RAW" == *"k" ]]; then
             COMMITS=$(echo "$COMMITS_RAW" | sed 's/k//' | awk '{printf "%.0f", $1 * 1000}')
           else
@@ -34,12 +37,14 @@ jobs:
           fi
 
           # 提取 PRs
-          PRS=$(sed -n 's/.*data-testid="prs"[^>]*>[[:space:]]*\([0-9][0-9]*\)[[:space:]]*<.*/\1/p' stats.svg)
+          PRS_LINE=$(grep -m1 'data-testid="prs"' stats.svg)
+          PRS=$(echo "$PRS_LINE" | sed -n 's/.*>\s*\([0-9]\+\)\s*<.*/\1/p')
 
           # 提取 Issues
-          ISSUES=$(sed -n 's/.*data-testid="issues"[^>]*>[[:space:]]*\([0-9][0-9]*\)[[:space:]]*<.*/\1/p' stats.svg)
+          ISSUES_LINE=$(grep -m1 'data-testid="issues"' stats.svg)
+          ISSUES=$(echo "$ISSUES_LINE" | sed -n 's/.*>\s*\([0-9]\+\)\s*<.*/\1/p')
 
-          # 兜底
+          # 兜底（按你要求，保留“Action出错”）
           RANK=${RANK:-Action出错}
           STARS=${STARS:-Action出错}
           COMMITS=${COMMITS:-Action出错}
