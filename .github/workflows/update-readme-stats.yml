@@ -1,0 +1,60 @@
+name: Update README Stats
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天 UTC 0 点运行
+  workflow_dispatch:      # 允许手动触发
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch Stats (JSON)
+        run: |
+          curl -s "https://api.github-readme-stats.vercel.app/api?username=CheongSzesuen&include_all_commits=true&format=json" > stats.json
+
+      - name: Extract Data
+        id: stats
+        run: |
+          STARS=$(jq -r '.totalStars' stats.json)
+          COMMITS=$(jq -r '.totalCommits' stats.json)
+          PRS=$(jq -r '.totalPRs' stats.json)
+          ISSUES=$(jq -r '.totalIssues' stats.json)
+          RANK=$(jq -r '.rank.level' stats.json)
+
+          echo "stars=$STARS" >> $GITHUB_OUTPUT
+          echo "commits=$COMMITS" >> $GITHUB_OUTPUT
+          echo "prs=$PRS" >> $GITHUB_OUTPUT
+          echo "issues=$ISSUES" >> $GITHUB_OUTPUT
+          echo "rank=$RANK" >> $GITHUB_OUTPUT
+
+      - name: Update README.md
+        run: |
+          RANK="${{ steps.stats.outputs.rank }}"
+          STARS="${{ steps.stats.outputs.stars }}"
+          COMMITS="${{ steps.stats.outputs.commits }}"
+          PRS="${{ steps.stats.outputs.prs }}"
+          ISSUES="${{ steps.stats.outputs.issues }}"
+
+          # 更新英文部分
+          sed -i "s/# My GitHub Stats().*/# My GitHub Stats($RANK)/" README.md
+          sed -i "s/# Total Stars Earned:.*/# Total Stars Earned: $STARS/" README.md
+          sed -i "s/# Total Commits:.*/# Total Commits: $COMMITS/" README.md
+          sed -i "s/# Total PRs:.*/# Total PRs: $PRS/" README.md
+          sed -i "s/# Total Issues:.*/# Total Issues: $ISSUES/" README.md
+
+          # 更新中文部分
+          sed -i "s/# GitHub数据（）/# GitHub数据（$RANK）/" README.md
+          sed -i "s/# 累计获得Stars：.*/# 累计获得Stars：$STARS/" README.md
+          sed -i "s/# 累计Commits：.*/# 累计Commits：$COMMITS/" README.md
+          sed -i "s/# 累计PRs：.*/# 累计PRs：$PRS/" README.md
+          sed -i "s/# 累计Issues：.*/# 累计Issues：$ISSUES/" README.md
+
+      - name: Commit & Push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: auto-update identity stats in README'
+          file_pattern: README.md
