@@ -16,33 +16,22 @@ jobs:
         run: |
           wget -qO stats.svg "https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true"
 
-      - name: Extract Data from SVG (Robust + Keep 'Action出错' Fallback)
+      - name: Extract Data from SVG (100% Stable with awk)
         id: stats
         run: |
-          # 提取 Rank
-          RANK_LINE=$(grep -m1 'data-testid="level-rank-icon"' stats.svg)
-          RANK=$(echo "$RANK_LINE" | sed -n 's/.*>\s*\([A-Z]\)\s*<.*/\1/p')
+          # 用 awk 提取所有数据（最稳定方式）
+          RANK=$(awk -F'data-testid="level-rank-icon"' 'NF>1 {gsub(/.*>/, "", $2); gsub(/<.*/, "", $2); gsub(/[^A-Z]/, "", $2); print $2; exit}' stats.svg)
+          STARS=$(awk -F'data-testid="stars"' 'NF>1 {gsub(/.*>/, "", $2); gsub(/<.*/, "", $2); gsub(/[^0-9]/, "", $2); print $2; exit}' stats.svg)
+          COMMITS_RAW=$(awk -F'data-testid="commits"' 'NF>1 {gsub(/.*>/, "", $2); gsub(/<.*/, "", $2); gsub(/^[[:space:]]+|[[:space:]]+$/, "", $2); print $2; exit}' stats.svg)
+          PRS=$(awk -F'data-testid="prs"' 'NF>1 {gsub(/.*>/, "", $2); gsub(/<.*/, "", $2); gsub(/[^0-9]/, "", $2); print $2; exit}' stats.svg)
+          ISSUES=$(awk -F'data-testid="issues"' 'NF>1 {gsub(/.*>/, "", $2); gsub(/<.*/, "", $2); gsub(/[^0-9]/, "", $2); print $2; exit}' stats.svg)
 
-          # 提取 Stars
-          STARS_LINE=$(grep -m1 'data-testid="stars"' stats.svg)
-          STARS=$(echo "$STARS_LINE" | sed -n 's/.*>\s*\([0-9]\+\)\s*<.*/\1/p')
-
-          # 提取 Commits（支持 k）
-          COMMITS_LINE=$(grep -m1 'data-testid="commits"' stats.svg)
-          COMMITS_RAW=$(echo "$COMMITS_LINE" | sed -n 's/.*>\s*\([^<]*\)\s*<.*/\1/p')
+          # 处理 Commits 的 "k" 单位
           if [[ "$COMMITS_RAW" == *"k" ]]; then
             COMMITS=$(echo "$COMMITS_RAW" | sed 's/k//' | awk '{printf "%.0f", $1 * 1000}')
           else
             COMMITS=$COMMITS_RAW
           fi
-
-          # 提取 PRs
-          PRS_LINE=$(grep -m1 'data-testid="prs"' stats.svg)
-          PRS=$(echo "$PRS_LINE" | sed -n 's/.*>\s*\([0-9]\+\)\s*<.*/\1/p')
-
-          # 提取 Issues
-          ISSUES_LINE=$(grep -m1 'data-testid="issues"' stats.svg)
-          ISSUES=$(echo "$ISSUES_LINE" | sed -n 's/.*>\s*\([0-9]\+\)\s*<.*/\1/p')
 
           # 兜底（按你要求，保留“Action出错”）
           RANK=${RANK:-Action出错}
