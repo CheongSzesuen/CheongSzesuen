@@ -14,7 +14,7 @@ jobs:
 
       - name: Fetch Stats SVG
         run: |
-          wget -qO stats.svg "https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true"
+          wget -qO stats.svg "https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true\&show_icons=true\&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage"
 
       - name: Extract Data from SVG (<desc> method)
         id: stats
