@@ -55,19 +55,19 @@ jobs:
           PRS="${{ steps.stats.outputs.prs }}"
           ISSUES="${{ steps.stats.outputs.issues }}"
 
-          # 更新英文部分 —— 支持重复更新
-          sed -i "s/# My GitHub Stats([^)]*)/# My GitHub Stats($RANK)/" README.md
-          sed -i "s/# Total Stars Earned:.*/# Total Stars Earned: $STARS/" README.md
-          sed -i "s/# Total Commits:.*/# Total Commits: $COMMITS/" README.md
-          sed -i "s/# Total PRs:.*/# Total PRs: $PRS/" README.md
-          sed -i "s/# Total Issues:.*/# Total Issues: $ISSUES/" README.md
+          # 更新英文部分 —— 支持无限次更新
+          sed -i "s/^# My GitHub Stats([^)]*)/# My GitHub Stats($RANK)/" README.md
+          sed -i "s/^# Total Stars Earned:.*/# Total Stars Earned: $STARS/" README.md
+          sed -i "s/^# Total Commits:.*/# Total Commits: $COMMITS/" README.md
+          sed -i "s/^# Total PRs:.*/# Total PRs: $PRS/" README.md
+          sed -i "s/^# Total Issues:.*/# Total Issues: $ISSUES/" README.md
 
-          # 更新中文部分 —— 支持重复更新
-          sed -i "s/# GitHub数据（[^）]*）/# GitHub数据（$RANK）/" README.md
-          sed -i "s/# 累计获得Stars：.*/# 累计获得Stars：$STARS/" README.md
-          sed -i "s/# 累计Commits：.*/# 累计Commits：$COMMITS/" README.md
-          sed -i "s/# 累计PRs：.*/# 累计PRs：$PRS/" README.md
-          sed -i "s/# 累计Issues：.*/# 累计Issues：$ISSUES/" README.md
+          # 更新中文部分 —— 支持无限次更新
+          sed -i "s/^# GitHub数据（[^）]*）/# GitHub数据（$RANK）/" README.md
+          sed -i "s/^# 累计获得Stars：.*/# 累计获得Stars：$STARS/" README.md
+          sed -i "s/^# 累计Commits：.*/# 累计Commits：$COMMITS/" README.md
+          sed -i "s/^# 累计PRs：.*/# 累计PRs：$PRS/" README.md
+          sed -i "s/^# 累计Issues：.*/# 累计Issues：$ISSUES/" README.md
 
       - name: Commit & Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
