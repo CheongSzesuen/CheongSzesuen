@@ -52,7 +52,7 @@ waijade
 <code><img height="20" alt="react" src="https://raw.githubusercontent.com/github/explore/main/topics/react/react.png"></code>
 <code><img height="20" alt="nodejs" src="https://raw.githubusercontent.com/github/explore/main/topics/nodejs/nodejs.png"></code>
 
-| <a href="https://github.com/CheongSzesuen/github-readme-stats"><img align="center" src="https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true" alt="CheongSzesuen's GitHub stats" /></a> | <a href="https://github.com/CheongSzesuen/github-readme-stats"><img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=CheongSzesuen&layout=compact&theme=buefy&hide_border=true" /></a> |
+| <a href="https://github.com/CheongSzesuen/github-readme-stats"><img align="center" src="https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true" alt="CheongSzesuen's GitHub stats" /></a> | <a href="https://github.com/CheongSzesuen/github-readme-stats"><img align="center" src="https://github-stats.waijade.cn/api/top-langs/?username=CheongSzesuen&layout=compact&theme=buefy&hide_border=true" /></a> |
 | ------------- | ------------- |
 
 
