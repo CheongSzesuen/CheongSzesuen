@@ -40,11 +40,11 @@ jobs:
           ISSUES=$(sed -n 's/.*data-testid="issues"[^>]*>[[:space:]]*\([0-9][0-9]*\)[[:space:]]*<.*/\1/p' stats.svg)
 
           # 兜底
-          RANK=${RANK:-B}
-          STARS=${STARS:-23}
-          COMMITS=${COMMITS:-884}
-          PRS=${PRS:-21}
-          ISSUES=${ISSUES:-59}
+          RANK=${RANK:-Action出错}
+          STARS=${STARS:-Action出错}
+          COMMITS=${COMMITS:-Action出错}
+          PRS=${PRS:-Action出错}
+          ISSUES=${ISSUES:-Action出错}
 
           # 输出
           echo "rank=$RANK" >> $GITHUB_OUTPUT
