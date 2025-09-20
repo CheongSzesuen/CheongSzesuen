@@ -2,7 +2,7 @@ name: Update README Stats
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天 UTC 0 点运行
+    - cron: '0 0 * * *'  # 每天 UTC 0 点运行（北京时间 8 点）
   workflow_dispatch:      # 允许手动触发
 
 jobs:
@@ -12,24 +12,33 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Fetch Stats (JSON)
+      - name: Fetch Stats SVG
         run: |
-          wget -qO stats.json "https://api.github-readme-stats.vercel.app/api?username=CheongSzesuen&include_all_commits=true&format=json"
+          wget -qO stats.svg "https://github-readme-stats.vercel.app/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true"
 
-      - name: Extract Data
+      - name: Extract Data from SVG
         id: stats
         run: |
-          STARS=$(jq -r '.totalStars' stats.json)
-          COMMITS=$(jq -r '.totalCommits' stats.json)
-          PRS=$(jq -r '.totalPRs' stats.json)
-          ISSUES=$(jq -r '.totalIssues' stats.json)
-          RANK=$(jq -r '.rank.level' stats.json)
+          # 从 SVG 源码中，根据 data-testid 精准提取数据（最可靠方式）
+          RANK=$(grep -oP '<text[^>]*data-testid="level-rank-icon"[^>]*>\s*\K[A-Z]' stats.svg)
+          STARS=$(grep -oP '<text[^>]*data-testid="stars"[^>]*>\s*\K[0-9]+' stats.svg)
+          COMMITS=$(grep -oP '<text[^>]*data-testid="commits"[^>]*>\s*\K[0-9]+' stats.svg)
+          PRS=$(grep -oP '<text[^>]*data-testid="prs"[^>]*>\s*\K[0-9]+' stats.svg)
+          ISSUES=$(grep -oP '<text[^>]*data-testid="issues"[^>]*>\s*\K[0-9]+' stats.svg)
 
+          # 输出供后续步骤使用
+          echo "rank=$RANK" >> $GITHUB_OUTPUT
           echo "stars=$STARS" >> $GITHUB_OUTPUT
           echo "commits=$COMMITS" >> $GITHUB_OUTPUT
           echo "prs=$PRS" >> $GITHUB_OUTPUT
           echo "issues=$ISSUES" >> $GITHUB_OUTPUT
-          echo "rank=$RANK" >> $GITHUB_OUTPUT
+
+          echo "=== Extracted Stats ==="
+          echo "Rank: $RANK"
+          echo "Stars: $STARS"
+          echo "Commits: $COMMITS"
+          echo "PRs: $PRS"
+          echo "Issues: $ISSUES"
 
       - name: Update README.md
         run: |
@@ -53,8 +62,8 @@ jobs:
           sed -i "s/# 累计PRs：.*/# 累计PRs：$PRS/" README.md
           sed -i "s/# 累计Issues：.*/# 累计Issues：$ISSUES/" README.md
 
-      - name: Commit & Push
+      - name: Commit & Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'chore: auto-update identity stats in README'
+          commit_message: 'chore: auto-update GitHub stats in README'
           file_pattern: README.md
