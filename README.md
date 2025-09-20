@@ -1,20 +1,40 @@
 ```bash
 [root@waijadelinux ~]# su - waijade
 [waijade@waijadelinux ~]$ whoami
-```
-```
- _       __      _     __          __   
-| |     / /___ _(_)   / /___ _____/ /__ 
-| | /| / / __ `/ /_  / / __ `/ __  / _ \
-| |/ |/ / /_/ / / /_/ / /_/ / /_/ /  __/
-|__/|__/\__,_/_/\____/\__,_/\__,_/\___/ 
-                                        
-```
+waijade
+[waijade@waijadelinux ~]$ cat ~/.identity
+__/\\\______________/\\\___________________________/\\\\\\\\\\\________________________/\\\_________________        
+ _\/\\\_____________\/\\\__________________________\/////\\\///________________________\/\\\_________________       
+  _\/\\\_____________\/\\\_________________/\\\_________\/\\\___________________________\/\\\_________________      
+   _\//\\\____/\\\____/\\\___/\\\\\\\\\____\///__________\/\\\______/\\\\\\\\\___________\/\\\______/\\\\\\\\__     
+    __\//\\\__/\\\\\__/\\\___\////////\\\____/\\\_________\/\\\_____\////////\\\_____/\\\\\\\\\____/\\\/////\\\_    
+     ___\//\\\/\\\/\\\/\\\______/\\\\\\\\\\__\/\\\_________\/\\\_______/\\\\\\\\\\___/\\\////\\\___/\\\\\\\\\\\__   
+      ____\//\\\\\\//\\\\\______/\\\/////\\\__\/\\\__/\\\___\/\\\______/\\\/////\\\__\/\\\__\/\\\__\//\\///////___  
+       _____\//\\\__\//\\\______\//\\\\\\\\/\\_\/\\\_\//\\\\\\\\\______\//\\\\\\\\/\\_\//\\\\\\\/\\__\//\\\\\\\\\\_ 
+        ______\///____\///________\////////\//__\///___\/////////________\////////\//___\///////\//____\//////////__
 
+I am CheongSzesuen.
+You may know me better as WaiJade —
+a phonetic homage to "Huái Jǐn" ,
+meaning "to hold jade within one's heart and hand":
+a soul of virtue, grace, and quiet brilliance.
+
+[waijade@waijadelinux ~]$ sudo locale-gen
+[sudo] WaiJade's password：
+Generating locales...
+  es_US.UTF-8... done
+  zh_CN.UTF-8... done
+Generation complete.
+
+[waijade@waijadelinux ~]$ cat ~/.identity-noascii
+我是CheongSzesuen。
+更多使用的名字也许是WaiJade。
+waijade，意为“怀瑾握瑜”，取自「怀瑾握瑜兮，穷不知所示。」
+——《楚辞·九章·怀沙》
+
+```
 
 <br />
-
-我是 **CheongSzesuen** ，更多使用的名字也许是**WaiJade**。WaiJade，意为怀瑾握瑜，音译于怀瑾。
 
 <code><img height="20" alt="html" src="https://raw.githubusercontent.com/github/explore/main/topics/html/html.png"></code>
 <code><img height="20" alt="css" src="https://raw.githubusercontent.com/github/explore/main/topics/css/css.png"></code>
