@@ -2,7 +2,7 @@ name: Update README Stats
 
 on:
   schedule:
-    - cron: '0 16 * * *'  # 每天 UTC 16 点运行（北京时间 0 点）
+    - cron: '0 16 * * *'  # 每天 UTC 16 点 = 北京时间 00:00
   workflow_dispatch:      # 允许手动触发
 
 jobs:
@@ -14,7 +14,7 @@ jobs:
 
       - name: Fetch Stats SVG
         run: |
-          wget -qO stats.svg "github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true"
+          wget -qO stats.svg "https://github-readme-stats.vercel.app/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true"
 
       - name: Extract Data from SVG (sed method)
         id: stats
@@ -55,15 +55,15 @@ jobs:
           PRS="${{ steps.stats.outputs.prs }}"
           ISSUES="${{ steps.stats.outputs.issues }}"
 
-          # 更新英文部分
-          sed -i "s/# My GitHub Stats().*/# My GitHub Stats($RANK)/" README.md
+          # 更新英文部分 —— 支持重复更新
+          sed -i "s/# My GitHub Stats([^)]*)/# My GitHub Stats($RANK)/" README.md
           sed -i "s/# Total Stars Earned:.*/# Total Stars Earned: $STARS/" README.md
           sed -i "s/# Total Commits:.*/# Total Commits: $COMMITS/" README.md
           sed -i "s/# Total PRs:.*/# Total PRs: $PRS/" README.md
           sed -i "s/# Total Issues:.*/# Total Issues: $ISSUES/" README.md
 
-          # 更新中文部分
-          sed -i "s/# GitHub数据（）/# GitHub数据（$RANK）/" README.md
+          # 更新中文部分 —— 支持重复更新
+          sed -i "s/# GitHub数据（[^）]*）/# GitHub数据（$RANK）/" README.md
           sed -i "s/# 累计获得Stars：.*/# 累计获得Stars：$STARS/" README.md
           sed -i "s/# 累计Commits：.*/# 累计Commits：$COMMITS/" README.md
           sed -i "s/# 累计PRs：.*/# 累计PRs：$PRS/" README.md
