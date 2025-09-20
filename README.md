@@ -10,18 +10,18 @@
 [waijade@waijadelinux ~]$ whoami
 waijade
 [waijade@waijadelinux ~]$ cat ~/.identity.en
-I am CheongSzesuen,  
-but you may know me better as WaiJade —  
-a name phonetically derived from “Huái Jǐn”,  
-embodying the virtue of “holding jade within heart and hand”,  
-as written in “Huai Sha” from the Nine Chapters of the Songs of Chu:  
-“I hold virtues like jade, yet none perceive them in my plight.”
+# I am CheongSzesuen,  
+# but you may know me better as WaiJade —  
+# a name phonetically derived from “Huái Jǐn”,  
+# embodying the virtue of “holding jade within heart and hand”,  
+# as written in “Huai Sha” from the Nine Chapters of the Songs of Chu:  
+# “I hold virtues like jade, yet none perceive them in my plight.”
 
 [waijade@waijadelinux ~]$ cat ~/.identity.zh
-我是CheongSzesuen。
-更多使用的名字也许是WaiJade。
-waijade，意为“怀瑾握瑜”，取自「怀瑾握瑜兮，穷不知所示。」
-——《楚辞·九章·怀沙》
+# 我是CheongSzesuen。
+# 更多使用的名字也许是WaiJade。
+# waijade，意为“怀瑾握瑜”，取自「怀瑾握瑜兮，穷不知所示。」
+# ——《楚辞·九章·怀沙》
 
 ```
 
