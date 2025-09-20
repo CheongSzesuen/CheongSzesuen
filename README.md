@@ -1,8 +1,4 @@
-```bash
-[root@waijadelinux ~]# su - waijade
-[waijade@waijadelinux ~]$ whoami
-waijade
-[waijade@waijadelinux ~]$ cat ~/.identity
+```text
 __/\\\______________/\\\___________________________/\\\\\\\\\\\________________________/\\\_________________        
  _\/\\\_____________\/\\\__________________________\/////\\\///________________________\/\\\_________________       
   _\/\\\_____________\/\\\_________________/\\\_________\/\\\___________________________\/\\\_________________      
@@ -12,21 +8,20 @@ __/\\\______________/\\\___________________________/\\\\\\\\\\\_________________
       ____\//\\\\\\//\\\\\______/\\\/////\\\__\/\\\__/\\\___\/\\\______/\\\/////\\\__\/\\\__\/\\\__\//\\///////___  
        _____\//\\\__\//\\\______\//\\\\\\\\/\\_\/\\\_\//\\\\\\\\\______\//\\\\\\\\/\\_\//\\\\\\\/\\__\//\\\\\\\\\\_ 
         ______\///____\///________\////////\//__\///___\/////////________\////////\//___\///////\//____\//////////__
+```
+```bash
+[root@waijadelinux ~]# su - waijade
+[waijade@waijadelinux ~]$ whoami
+waijade
+[waijade@waijadelinux ~]$ cat ~/.identity.en
+I am CheongSzesuen,  
+but you may know me better as WaiJade —  
+a name phonetically derived from “Huái Jǐn”,  
+embodying the virtue of “holding jade within heart and hand”,  
+as written in “Huai Sha” from the Nine Chapters of the Songs of Chu:  
+> “I hold virtues like jade, yet none perceive them in my plight.”
 
-I am CheongSzesuen.
-You may know me better as WaiJade —
-a phonetic homage to "Huái Jǐn" ,
-meaning "to hold jade within one's heart and hand":
-a soul of virtue, grace, and quiet brilliance.
-
-[waijade@waijadelinux ~]$ sudo locale-gen
-[sudo] WaiJade's password：
-Generating locales...
-  es_US.UTF-8... done
-  zh_CN.UTF-8... done
-Generation complete.
-
-[waijade@waijadelinux ~]$ cat ~/.identity-noascii
+[waijade@waijadelinux ~]$ cat ~/.identity.zh
 我是CheongSzesuen。
 更多使用的名字也许是WaiJade。
 waijade，意为“怀瑾握瑜”，取自「怀瑾握瑜兮，穷不知所示。」
