@@ -17,11 +17,11 @@ waijade
 # —— From 'Chu Ci · Jiang Chapter 9 · Huai Sha'
 #
 # My GitHub Stats(B)
-# Total Stars Earned: 26
-# Total Commits: 1210
-# Total PRs: 21
-# Total PRs Merged: 15
-# Merged PRs Percentage: 71.43
+# Total Stars Earned: 27
+# Total Commits: 1225
+# Total PRs: 23
+# Total PRs Merged: 17
+# Merged PRs Percentage: 73.91
 # Total Issues: 65
 # Total PRs Reviewed: 11
 #
@@ -37,11 +37,11 @@ waijade
 # ——《楚辞·九章·怀沙》
 #
 # GitHub数据（B）
-# 累计获得Stars：26
-# 累计Commits：1210
-# 累计PR：21
-# 累计PR被合并数: 15
-# PR被合并率: 71.43
+# 累计获得Stars：27
+# 累计Commits：1225
+# 累计PR：23
+# 累计PR被合并数: 17
+# PR被合并率: 73.91
 # 累计issues: 62
 # 累计审查PR数: 11
 #
