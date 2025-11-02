@@ -18,12 +18,12 @@ waijade
 #
 # My GitHub Stats(B)
 # Total Stars Earned: 27
-# Total Commits: 1244
+# Total Commits: 1247
 # Total PRs: 23
 # Total PRs Merged: 17
 # Merged PRs Percentage: 73.91
 # Total Issues: 65
-# Total PRs Reviewed: 11
+# Total PRs Reviewed: 12
 #
 # Open source
 # “As open-source software, GeoGebra promotes the ideals of free access and shared contribution.
@@ -38,12 +38,12 @@ waijade
 #
 # GitHub数据（B）
 # 累计获得Stars：27
-# 累计Commits：1244
+# 累计Commits：1247
 # 累计PR：23
 # 累计PR被合并数: 17
 # PR被合并率: 73.91
 # 累计issues: 62
-# 累计审查PR数: 11
+# 累计审查PR数: 12
 #
 # 开源
 # “作为开源软件，GeoGebra倡导免费使用、贡献共享的理念，我们在享受他人所贡献的丰富资源的同时，是不是也期待着能有所贡献呢？”
