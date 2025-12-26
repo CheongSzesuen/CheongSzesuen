@@ -16,7 +16,7 @@ jobs:
         run: |
           wget -qO stats.svg "https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage"
 
-      - name: Extract All Data from <desc> (100% Stable)
+      - name: Extract All Data from <desc>
         id: stats
         run: |
           # 提取 <desc> 标签内的完整文本
@@ -31,11 +31,11 @@ jobs:
           PRS_REVIEWED=$(echo "$DESC_TEXT" | grep -o 'Total PRs Reviewed: *[0-9]*' | grep -o '[0-9]*$')
           ISSUES=$(echo "$DESC_TEXT" | grep -o 'Total Issues: *[0-9]*' | grep -o '[0-9]*$')
 
-          # 从 <title> 提取 Rank
+          # 从 <title> 提取 Rank（注意：可能是 B+、A 等格式）
           TITLE_TEXT=$(grep '<title id="titleId">' stats.svg | sed 's/.*<title[^>]*>//; s/<\/title.*//')
-          RANK=$(echo "$TITLE_TEXT" | grep -o 'Rank: *[A-Z]' | grep -o '[A-Z]$')
+          RANK=$(echo "$TITLE_TEXT" | grep -o 'Rank: *[A-Z][+-]*' | grep -o '[A-Z][+-]*$')
 
-          # 兜底（按你要求，保留“Action出错”）
+          # 兜底
           RANK=${RANK:-Action出错}
           STARS=${STARS:-Action出错}
           COMMITS=${COMMITS:-Action出错}
@@ -94,7 +94,7 @@ jobs:
           sed -i "s/^# 累计PR被合并数:.*/# 累计PR被合并数: $PRS_MERGED/" README.md
           sed -i "s/^# PR被合并率:.*/# PR被合并率: $MERGED_PERCENTAGE/" README.md
           sed -i "s/^# 累计审查PR数:.*/# 累计审查PR数: $PRS_REVIEWED/" README.md
-          sed -i "s/^# 累计Issues:.*/# 累计issues: $ISSUES/" README.md
+          sed -i "s/^# 累计Issues:.*/# 累计Issues: $ISSUES/" README.md
 
       - name: Set Git identity to bot
         run: |
