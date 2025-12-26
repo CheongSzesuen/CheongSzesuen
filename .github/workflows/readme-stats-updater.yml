@@ -14,7 +14,7 @@ jobs:
 
       - name: Fetch Stats SVG
         run: |
-          wget -qO stats.svg "https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true&show_icons=true&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage"
+          wget -qO stats.svg "https://github-stats.waijade.cn/api?username=CheongSzesuen&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage"
 
       - name: Extract All Data from <desc> (100% Stable)
         id: stats
@@ -95,6 +95,11 @@ jobs:
           sed -i "s/^# PR被合并率:.*/# PR被合并率: $MERGED_PERCENTAGE/" README.md
           sed -i "s/^# 累计审查PR数:.*/# 累计审查PR数: $PRS_REVIEWED/" README.md
           sed -i "s/^# 累计Issues:.*/# 累计issues: $ISSUES/" README.md
+
+      - name: Set Git identity to bot
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Commit & Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
